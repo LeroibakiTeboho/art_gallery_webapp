@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/font": "^14.2.4",
+    "lightbox2": "^2.11.4",
     "next": "14.2.4",
     "react": "^18",
     "react-dom": "^18",

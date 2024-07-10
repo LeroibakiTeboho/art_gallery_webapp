@@ -1,111 +1,102 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+
+// https://coolors.co/ff8811-f4d06f-fff8f0-9dd9d2-392f5a
+// https://youtu.be/4gcy-qT9kGw
+// https://lokeshdhakar.com/projects/lightbox2/#getting-started
+// https://dianerosenstein.com/exhibitions/
+
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
-  const [color, setColor] = useState("transparent");
-  const [textColor, setTextColor] = useState("white");
+
 
   const handleNav = () => {
     setNav(!nav);
   };
 
+  // useEffect(() => {
+  //   const changeColor = () => {
+  //     if(window.scrollY >= 90) {
+  //       setColor('#FFF8F0')
+  //       setTextColor('#000')
+  //     }
+  //     else
+  //     {
+  //       setColor('transparent');
+  //       setTextColor("#000")
+  //     }
+  //   }
+
+  //   window.addEventListener('scroll',changeColor);
+  // })
+
   return (
-    <div
-      style={{
-        backgroundColor: `${color}`,
-      }}
-      className="fixed left-0 top-0 w-full z-10 ease-in duration-300"
-    >
-      <div className="navbar max-w-[1360px] m-auto flex justify-between items-center py-8 px-8 text-white">
+    <div className=" sticky left-0 top-0 w-full z-10 ease-in duration-300 ">
+      <div className="max-w-[1360px] m-auto flex justify-between items-center py-5 px-8 text-[#392F5A] border-b-[1px] border-gray-400 bg-[#FFF8F0]">
         <Link href="/">
-          <h1
-            style={{
-              color: `${textColor}`,
-            }}
-            className="font-bold text-[2rem]"
-          >
-            Artistry Haven
-          </h1>
+          <h1 className="font-bold text-[1.8rem]">Artistry Haven.</h1>
         </Link>
 
-        <ul
-          style={{
-            color: `${textColor}`,
-          }}
-          className="hidden xl:flex gap-8 text-[1.2rem] items-center "
-        >
-          <li>
+        <ul className="hidden md:flex gap-5 text-[1.1rem] items-center ">
+          <li className="hover:text-[#9DD9D2] ease-in duration-200">
             <Link href="/">Home</Link>
           </li>
-          <li>
-            <Link href="/#">Gallary</Link>
+          <span>-</span>
+          <li className="hover:text-[#9DD9D2] ease-in duration-200">
+            <Link href="/#">Galley</Link>
           </li>
-          <li>
+          <span>-</span>
+          <li className="hover:text-[#9DD9D2] ease-in duration-200">
+            <Link href="/#">Exhibitions</Link>
+          </li>
+          <span>-</span>
+          <li className="hover:text-[#9DD9D2] ease-in duration-200">
             <Link href="/artist">Artists</Link>
           </li>
-          <li>
-            <Link href="/exhibition">Exhibitions</Link>
-          </li>
-
-          <li>
-            <Link href="/about">About Us</Link>
-          </li>
-          <li>
-            <Link href="/contact">Contact Us</Link>
-          </li>
-          <li>
-            <Link href="/support">Donate & Support</Link>
-          </li>
-          <li>
-            <button className="btn rounded-md text-white btn-outline border px-4 cursor-pointer">
-              Login
-            </button>
+          <span>-</span>
+          <li className="hover:hover:text-[#9DD9D2] ease-in duration-200">
+            <Link href="/events">Art Fairs</Link>
           </li>
         </ul>
 
         {/* || mobile button */}
-        <div onClick={handleNav} className="block xl:hidden z-10 cursor-pointer">
+        <div
+          onClick={handleNav}
+          className="block md:hidden z-10 cursor-pointer"
+        >
           {nav ? (
-            <AiOutlineClose size={25} style={{ color: `${textColor}` }} />
+            <AiOutlineClose className="text-white" size={25} />
           ) : (
-            <AiOutlineMenu size={25} style={{ color: `${textColor}` }} />
+            <AiOutlineMenu className="text-black" size={25} />
           )}
         </div>
         {/* || mobile menu */}
         <div
           className={
             nav
-              ? "xl:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-300"
-              : "xl:hidden absolute  top-[-100vh] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-300"
+              ? "md:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black/95 text-center ease-in duration-300"
+              : "md:hidden absolute  right-[-100vw]  top-0 bottom-0 flex justify-center items-center w-full h-screen bg-black/95 text-center ease-in duration-300"
           }
         >
-          <ul>
+          <ul className="text-white">
             <li className="p-4 text-4xl hover:text-gray-500">
               <Link href="/">Home</Link>
             </li>
             <li className="p-4 text-4xl hover:text-gray-500">
-              <Link href="/#">Gallary</Link>
+              <Link href="/#">Exhibitions</Link>
             </li>
             <li className="p-4 text-4xl hover:text-gray-500">
               <Link href="/artist">Artists</Link>
             </li>
             <li className="p-4 text-4xl hover:text-gray-500">
-              <Link href="/exhibition">Exhibitions</Link>
+              <Link href="/events">Art Fairs</Link>
             </li>
+
             <li className="p-4 text-4xl hover:text-gray-500">
-              <Link href="/about">About Us</Link>
-            </li>
-            <li className="p-4 text-4xl hover:text-gray-500">
-              <Link href="/contact">Contact Us</Link>
-            </li>
-            <li className="p-4 text-4xl hover:text-gray-500">
-              <Link href="/support">Donate and Support</Link>
-            </li>
-            <li className="p-4 text-2xl hover:text-gray-500">
-              <button className="border py-3 px-5">Login</button>
+              <Link href="/contact">Contact</Link>
             </li>
           </ul>
         </div>

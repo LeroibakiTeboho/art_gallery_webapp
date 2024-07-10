@@ -1,4 +1,6 @@
 import React from "react";
+import Gallery from "./Gallery";
+
 
 interface HeroProps {
   heading: string;
@@ -7,9 +9,9 @@ interface HeroProps {
 
 const Hero: React.FC<HeroProps> = ({ heading, message }) => {
   return (
-    <div className="min-h-screen w-full pl flex items-center justify-center mb-12 bg-cover bg-center bg-fixed  custom-img overflow-hidden">
+    <div className="h-[50vh] flex justify-center items-start bg-cover bg-center bg-fixed  custom-img  ">
       {/* Overlay */}
-      <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 Z-[2]" />
+      {/* <div className="absolute top-0 left-0 right-0 bottom-0 bg-black/70 Z-[2]" /> */}
 
       {/* <div className="text-white z-[2] ">
         <h2 className="text-6xl font-bold ">{heading}</h2>
@@ -20,14 +22,16 @@ const Hero: React.FC<HeroProps> = ({ heading, message }) => {
         </div>
       </div> */}
 
-      <div className="p-16 text-white z-[2] max-w-[900px] sm:mt-0 mt-20">
-        <h2 className="text-6xl font-bold" >{heading}</h2>
-        <p className="py-5 text-xl leading-[1.5]" >{message}</p>
-        <div className=" flex sm:items-center justify-center flex-wrap gap-4 sm:gap-28 mt-10 sm:mt-10 ">
-          <button className="btn btn-outline text-white w-[250px] h-[60px] text-[1.2rem]">Buy Art</button>
+      <div className="p-16 text-[#392F5A] z-[2] max-w-[900px] sm:mt-0 mt-20">
+        {/* <h2 className="text-6xl font-bold" >{heading}</h2> */}
+        <h1 className="py-5 pt-20 text-2xl leading-[1.5] paragraph-bg bg-cover bg-center " >{message}</h1>
+        {/* <div className=" flex md:items-center justify-center flex-wrap gap-4 md:gap-28 mt-10 sm:mt-10 ">
+          <button className="btn btn-outline text-white w-[250px] h-[60px] text-[1.2rem]">Exhibitions</button>
           <button className="btn btn-outline text-white w-[250px] text-[1.2rem] h-[60px]">Events</button>
-        </div>
+        </div> */}
       </div>
+
+
 
      
     </div>
