@@ -35,7 +35,7 @@ const Navbar = () => {
 
   return (
     <div className=" sticky left-0 top-0 w-full z-10 ease-in duration-300 ">
-      <div className="max-w-[1360px] m-auto flex justify-between items-center py-5 px-8 text-[#392F5A] border-b-[1px] border-gray-400 bg-[#FFF8F0]">
+      <div className="max-w-[1360px] m-auto flex justify-between items-center py-7 px-8 text-[#392F5A] border-b-[1px] border-gray-200 bg-[#FFF8F0]/95">
         <Link href="/">
           <h1 className="font-bold text-[1.8rem]">Artistry Haven.</h1>
         </Link>
@@ -68,34 +68,35 @@ const Navbar = () => {
           className="block md:hidden z-10 cursor-pointer"
         >
           {nav ? (
-            <AiOutlineClose className="text-white" size={25} />
+            <AiOutlineClose className="text-[#392F5A]" size={25} />
           ) : (
             <AiOutlineMenu className="text-black" size={25} />
           )}
         </div>
         {/* || mobile menu */}
         <div
-          className={
+          className={ 
             nav
-              ? "md:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black/95 text-center ease-in duration-300"
-              : "md:hidden absolute  right-[-100vw]  top-0 bottom-0 flex justify-center items-center w-full h-screen bg-black/95 text-center ease-in duration-300"
+            ? "md:hidden fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-[#FFF8F0]/95 text-center transform transition-transform duration-500 ease-in-out translate-x-0"
+            : "md:hidden fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-[#FFF8F0]/95 text-center transform transition-transform duration-500 ease-in-out -translate-x-full"
+
           }
         >
-          <ul className="text-white">
-            <li className="p-4 text-4xl hover:text-gray-500">
+          <ul className="text-[#392F5A] text-4xl">
+            <li className="py-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
               <Link href="/">Home</Link>
             </li>
-            <li className="p-4 text-4xl hover:text-gray-500">
+            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
               <Link href="/#">Exhibitions</Link>
             </li>
-            <li className="p-4 text-4xl hover:text-gray-500">
+            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
               <Link href="/artist">Artists</Link>
             </li>
-            <li className="p-4 text-4xl hover:text-gray-500">
+            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
               <Link href="/events">Art Fairs</Link>
             </li>
 
-            <li className="p-4 text-4xl hover:text-gray-500">
+            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5] ">
               <Link href="/contact">Contact</Link>
             </li>
           </ul>
