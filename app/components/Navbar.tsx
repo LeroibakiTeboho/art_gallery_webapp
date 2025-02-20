@@ -1,108 +1,105 @@
 "use client";
-import Link from "next/link";
-import React, { useState, useEffect } from "react";
-import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-
-// https://coolors.co/ff8811-f4d06f-fff8f0-9dd9d2-392f5a
-// https://youtu.be/4gcy-qT9kGw
-// https://lokeshdhakar.com/projects/lightbox2/#getting-started
-// https://dianerosenstein.com/exhibitions/
-
+import { useState, useEffect } from 'react';
+import Logo from './Logo'; // Your logo component
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  const handleNav = () => {
-    setNav(!nav);
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // useEffect(() => {
-  //   const changeColor = () => {
-  //     if(window.scrollY >= 90) {
-  //       setColor('#FFF8F0')
-  //       setTextColor('#000')
-  //     }
-  //     else
-  //     {
-  //       setColor('transparent');
-  //       setTextColor("#000")
-  //     }
-  //   }
-
-  //   window.addEventListener('scroll',changeColor);
-  // })
+  const handleLinkClick = (item: string) => {
+    setActiveSection(item);
+    setIsMobileMenuOpen(false); // Close the mobile menu when a link is clicked
+  };
 
   return (
-    <div className=" sticky left-0 top-0 w-full z-10 ease-in duration-300 ">
-      <div className="max-w-[1360px] m-auto flex justify-between items-center py-7 px-8 text-[#392F5A] border-b-[1px] border-gray-200 bg-[#FFF8F0]/95">
-        <Link href="/">
-          <h1 className="font-bold text-[1.8rem]">Artistry Haven.</h1>
-        </Link>
+    <nav className={`fixed py-2 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-sm shadow-sm' : 'bg-transparent'
+      }`}>
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <Logo />
 
-        <ul className="hidden md:flex gap-5 text-[1.1rem] items-center ">
-          <li className="hover:text-[#9DD9D2] ease-in duration-200">
-            <Link href="/">Home</Link>
-          </li>
-          <span>-</span>
-          <li className="hover:text-[#9DD9D2] ease-in duration-200">
-            <Link href="/#">Galley</Link>
-          </li>
-          <span>-</span>
-          <li className="hover:text-[#9DD9D2] ease-in duration-200">
-            <Link href="/#">Exhibitions</Link>
-          </li>
-          <span>-</span>
-          <li className="hover:text-[#9DD9D2] ease-in duration-200">
-            <Link href="/artist">Artists</Link>
-          </li>
-          <span>-</span>
-          <li className="hover:hover:text-[#9DD9D2] ease-in duration-200">
-            <Link href="/events">Art Fairs</Link>
-          </li>
-        </ul>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex space-x-8">
+          {['home', 'about', 'skills','experience'].map((item) => (
+            <a
+              key={item}
+              href={`#${item}`}
+              onClick={() => setActiveSection(item)}
+              className={`relative px-2 py-1 uppercase text-sm font-medium transition-all duration-300 group ${activeSection === item ? 'text-purple-600' : 'text-gray-600 hover:text-gray-900'
+                }`}
+            >
+              {item}
+              {/* Animated underline */}
+              <span className={`absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-pink-500 transition-all duration-300 group-hover:w-full ${activeSection === item ? 'w-full' : ''
+                }`}></span>
 
-        {/* || mobile button */}
-        <div
-          onClick={handleNav}
-          className="block md:hidden z-10 cursor-pointer"
+              {/* Floating dots */}
+              <div className="absolute -top-3  opacity-0 group-hover:opacity-100 transition-opacity">
+                {[...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-1 h-1 rounded-full bg-purple-400 animate-float"
+                    style={{
+                      left: `${i * 5}px`,
+                      animationDelay: `${i * 0.2}s`,
+                    }}
+                  />
+                ))}
+              </div>
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={toggleMobileMenu}
+          className="md:hidden p-2 rounded-full bg-gradient-to-br from-blue-500 to-pink-500 hover:scale-110 transition-transform"
         >
-          {nav ? (
-            <AiOutlineClose className="text-[#392F5A]" size={25} />
+          {isMobileMenuOpen ? (
+            <AiOutlineClose className="text-white text-lg" />
           ) : (
-            <AiOutlineMenu className="text-black" size={25} />
+            <AiOutlineMenu className="text-white text-lg" />
           )}
-        </div>
-        {/* || mobile menu */}
-        <div
-          className={ 
-            nav
-            ? "md:hidden fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-[#FFF8F0]/95 text-center transform transition-transform duration-500 ease-in-out translate-x-0"
-            : "md:hidden fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-[#FFF8F0]/95 text-center transform transition-transform duration-500 ease-in-out -translate-x-full"
+        </button>
 
-          }
-        >
-          <ul className="text-[#392F5A] text-4xl">
-            <li className="py-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
-              <Link href="/">Home</Link>
-            </li>
-            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
-              <Link href="/#">Exhibitions</Link>
-            </li>
-            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
-              <Link href="/artist">Artists</Link>
-            </li>
-            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5]">
-              <Link href="/events">Art Fairs</Link>
-            </li>
-
-            <li className="p-5 duration-200 hover:text-gray-500 hover:scale-[1.5] ">
-              <Link href="/contact">Contact</Link>
-            </li>
-          </ul>
-        </div>
+        {/* Animated star button */}
+        <button className="ml-8 p-2 rounded-full bg-gradient-to-br from-blue-500 to-pink-500 hover:scale-110 transition-transform">
+          <span className="text-white text-lg animate-pulse">✦</span>
+        </button>
       </div>
-    </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden h-full bg-white/90 backdrop-blur-sm shadow-sm">
+          <div className="container mx-auto px-4 py-3 flex flex-col space-y-4">
+            {['home', 'about', 'skills', 'projects', 'contact'].map((item) => (
+              <a
+                key={item}
+                href={`#${item}`}
+                onClick={() => handleLinkClick(item)}
+                className={`relative px-2 py-2 uppercase text-md font-medium transition-all duration-300 ${activeSection === item ? 'text-purple-600' : 'text-gray-600 hover:text-gray-900'
+                  }`}
+              >
+                {item}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
   );
 };
 

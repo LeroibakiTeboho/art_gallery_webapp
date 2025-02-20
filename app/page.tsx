@@ -1,14 +1,12 @@
-import Hero from "./components/Hero";
-import Gallery from "./components/Gallery";
+import About from "./components/About/AboutComponent";
+import Hero from "./components/HeroSection/Hero";
+
 
 export default function Home() {
   return (
     <div className="overflow-hidden">
-      <Hero
-        heading="Discover the Masterpieces"
-        message="Explore a curated collection of exquisite art from taleted artists around the world. Find your inspiration, embrace creativity, and brinf home your next masterpiece."
-      />
-      <Gallery />
+      <Hero/>
+
     </div>
   );
 }
